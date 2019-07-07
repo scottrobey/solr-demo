@@ -1,0 +1,34 @@
+/**
+ * Demo Solr sharding
+ */
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'distribution'
+
+group "org.robey.solr.demo"
+version "1.0"
+
+ext {
+    solrVersion = '8.1.1'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    //compile group: 'org.apache.solr', name: 'solr', version: '8.1.1'
+}
+
+task setupSolr(type: Copy) {
+    from tarTree("solr-${solrVersion}.tgz")
+    into buildDir
+    doLast {
+        file("${buildDir}/solr-${solrVersion}").renameTo("${buildDir}/solr")
+    }
+}
+
+build.dependsOn 'setupSolr'
