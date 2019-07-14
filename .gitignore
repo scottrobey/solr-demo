@@ -1,0 +1,12 @@
+
+#gradle files
+build/
+.gradle
+
+.vagrant
+
+.idea
+*.iml
+
+solr-*.tgz
+
